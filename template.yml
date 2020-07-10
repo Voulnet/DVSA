@@ -1,18 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: 'DVSA Stack (Repository Deployment)'
+Description: 'Modified DVSA Clone Stack (Repository Deployment)'
 
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: DVSA
-    Description: Damn Vulnerable Serverless Application (DVSA)'
-    Author: 'Tal Melamed'
+    Description: 'A modified clone of https://github.com/OWASP/DVSA'
+    Author: 'Original authors: OWASP, Tal Melamed. Modified by: Mohammed Aldoub'
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
     Labels: ['serverless', 'security', 'vulnerability']
     HomePageUrl: https://owasp.org/www-project-dvsa/
     SemanticVersion: 1.2.4
-    SourceCodeUrl: https://github.com/owasp/DVSA
+    SourceCodeUrl: https://github.com/Voulnet/DVSA
 
 Globals:
   Api:
@@ -30,7 +30,10 @@ Parameters:
     Description: Define stage to which Lambdas/API Gateways should be deployed.
     Type: String
     Default: dev
-
+  email:
+    Description: Your email to send and receive emails thru SES.
+    Type: String
+    Default: whatever@example.org
 Resources:
 
   ApiGatewayApi:
@@ -760,7 +763,7 @@ Resources:
       Environment:
         Variables:
           ORDERS_TABLE: DVSA-ORDERS-DB
-          SOURCE_EMAIL: dvsa.noreply@mailsac.com
+          SOURCE_EMAIL: ${email}
       MemorySize: 128
       Timeout: 10
       Role: !GetAtt SendReceiptRole.Arn
