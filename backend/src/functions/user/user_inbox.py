@@ -148,9 +148,9 @@ def lambda_handler(event, context):
 
     if action == "verify":
         ses = boto3.client('ses')
-        response = ses.verify_email_identity(
-            EmailAddress=mailsac_email
-        )
+        #response = ses.verify_email_identity(
+        #    EmailAddress=mailsac_email
+        #)
         time.sleep(2)
 
         _id = getVerificationEmailId(mailsac_email)
