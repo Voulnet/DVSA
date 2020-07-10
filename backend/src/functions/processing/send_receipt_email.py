@@ -92,24 +92,24 @@ def lambda_handler(event, context):
 
             ses = boto3.client('ses')
 
-            response = ses.send_email(
-                Destination={
-                    'ToAddresses': [mailsac_email],
-                },
-                Message={
-                    'Body': {
-                        'Html': {
-                            'Charset': 'UTF-8',
-                            'Data': email_msg
-                        },
-                    },
-                    'Subject': {
-                        'Charset': 'UTF-8',
-                        'Data': subject,
-                    },
-                },
-                Source=os.environ["SOURCE_EMAIL"],
-            )
+            #response = ses.send_email(
+            #    Destination={
+            #        'ToAddresses': [mailsac_email],
+            #    },
+            #    Message={
+            #        'Body': {
+            #            'Html': {
+            #                'Charset': 'UTF-8',
+            #                'Data': email_msg
+            #            },
+            #        },
+            #        'Subject': {
+            #            'Charset': 'UTF-8',
+            #            'Data': subject,
+            #        },
+            #    },
+            #    Source=os.environ["SOURCE_EMAIL"],
+            #)
 
             response = ses.send_email(
                 Destination={
